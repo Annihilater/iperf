@@ -23,9 +23,7 @@
 #ifndef cJSON__h
 #define cJSON__h
 
-#ifdef HAVE_STDINT_H
 #include <stdint.h>
-#endif
 
 #ifdef __cplusplus
 extern "C"
@@ -115,7 +113,7 @@ typedef struct cJSON
     /* The type of the item, as above. */
     int type;
 
-    /* The item's string, if type==cJSON_String  and type == cJSON_Raw */
+    /* The item's string, if type==cJSON_String and type == cJSON_Raw */
     char *valuestring;
     /* writing to valueint is DEPRECATED, use cJSON_SetNumberValue instead */
     int64_t valueint;

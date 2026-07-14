@@ -12,7 +12,7 @@ What is the history of iperf3, and what is the difference between iperf2 and ipe
   base. For this reason, it was decided to make the tool single
   threaded, and not worry about backwards compatibility with
   iperf2. Many of the feature requests for iperf3 came from the
-  perfSONAR project (http://www.perfsonar.net).
+  perfSONAR project (https://www.perfsonar.net).
 
   Then in 2014, Bob (Robert) McMahon from Broadcom restarted
   development of iperf2 (See
@@ -22,7 +22,14 @@ What is the history of iperf3, and what is the difference between iperf2 and ipe
   current development is focused is on using UDP for latency testing, as well
   as broad platform support.
 
-  As of this writing (2017), both iperf2 and iperf3 are being actively
+  In 2023, iperf3 was modified and restructured to support
+  multi-threading, so that it uses one thread per test stream. This
+  allows it to use multiple CPU cores during tests, which in turn
+  permit it to keep up with continually increasing network link and
+  path bandwidths across the backbones of ESnet and other network
+  providers.
+
+  As of this writing (2024), both iperf2 and iperf3 are being actively
   (although independently) developed.  We recommend being familiar with
   both tools, and use whichever tool’s features best match your needs.
 
@@ -30,9 +37,22 @@ What is the history of iperf3, and what is the difference between iperf2 and ipe
   https://fasterdata.es.net/performance-testing/network-troubleshooting-tools/throughput-tool-comparision/
 
 iperf3 parallel stream performance is much less than iperf2. Why?
-  iperf3 is single threaded, and iperf2 is multi-threaded. We
-  recommend using iperf2 for parallel streams.
-  If you want to use multiple iperf3 streams use the method described `here <https://fasterdata.es.net/performance-testing/network-troubleshooting-tools/iperf/multi-stream-iperf3/>`_.
+  Versions of iperf3 before version 3.16 were all single threaded, and
+  iperf2 is multi-threaded. This could result in a performance gap
+  because iperf3 was only able to use one CPU core on a host, which
+  turned into a bottleneck when trying to do high bitrate tests
+  (faster than about 25 Gbps).
+
+  Beginning with version 3.16, iperf3 is multi-threaded, which allows
+  it to take advantage of multiple CPU cores during a test (one thread
+  per stream). iperf3 has been observed to send and receive
+  approximately 160Gbps on a 200Gbps path in a test involving multiple
+  TCP flows, with little or no tuning.
+
+  Prior to multi-threading support in iperf3, one might need to use
+  the method described `here
+  <https://fasterdata.es.net/performance-testing/network-troubleshooting-tools/iperf/multi-stream-iperf3/>`_
+  to achieve faster speeds.
 
 I’m trying to use iperf3 on Windows, but having trouble. What should I do?
   iperf3 is not officially supported on Windows, but iperf2 is. We
@@ -242,7 +262,7 @@ A file sent using the ``-F`` option got corrupted...what happened?
 
 I have a question regarding iperf3...what's the best way to get help?
   Searching on the Internet is a good first step.
-  http://stackoverflow.com/ has a number of iperf3-related questions
+  https://stackoverflow.com/ has a number of iperf3-related questions
   and answers, but a simple query into your favorite search engine can
   also yield some results.
 

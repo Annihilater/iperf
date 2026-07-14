@@ -4,7 +4,7 @@ iperf3:  A TCP, UDP, and SCTP network bandwidth measurement tool
 Summary
 -------
 
-iperf is a tool for active measurements of the maximum achievable
+iperf is a tool for active measurement of the maximum achievable
 bandwidth on IP networks.  It supports tuning of various parameters
 related to timing, protocols, and buffers.  For each test it reports
 the measured throughput / bitrate, loss, and other parameters.
@@ -17,6 +17,12 @@ other programs. iperf3 also has a number of features found in other tools
 such as nuttcp and netperf, but were missing from the original iperf.
 These include, for example, a zero-copy mode and optional JSON output.
 Note that iperf3 is *not* backwards compatible with the original iperf.
+
+One of the primary uses for iperf3 is as a component of the perfSONAR
+network measurement system (https://www.perfsonar.net/). It is also
+useful as a standalone tool, and is used as such by ESnet and other
+R&E networks. It has also been found useful in the general networking
+community and has even found its way into various commercial products.
 
 Primary development for iperf3 takes place on Ubuntu Linux, FreeBSD,
 and macOS.  At this time, these are the only officially supported
@@ -31,6 +37,10 @@ For more information see: https://software.es.net/iperf
 Source code and issue tracker: https://github.com/esnet/iperf
 
 Discussion forums: https://github.com/esnet/iperf/discussions
+
+Reporting security vulnerabilities: iperf@es.net
+
+Frequently Asked Questions: https://software.es.net/iperf/faq.html
 
 Obtaining iperf3
 ----------------
@@ -78,8 +88,8 @@ These flags include:
     -Z, --zerocopy            use a 'zero copy' sendfile() method of sending data
     -A, --affinity n/n,m      set CPU affinity
 
-Bug Reports
------------
+Bug and Security Reports
+------------------------
 
 Before submitting a bug report, please make sure you're running the
 latest version of the code, and confirm that your issue has not
@@ -99,34 +109,19 @@ sensitive information.
 If you have a question about usage or about the code, please do *not*
 submit an issue.  Please use one of the mailing lists for that.
 
+If you suspect there is a potential security issue, please contact the
+developers at:
+
+iperf@es.net
+
 Relation to iperf 2.x
 ---------------------
 
 Although iperf2 and iperf3 both measure network performance,
 they are not compatible with each other.
-The projects (as of mid-2021) are in active, but separate, development.
+The projects (as of early 2026) are in active, but separate, development.
 The continuing iperf2 development
 project can be found at https://sourceforge.net/projects/iperf2/.
-
-iperf3 contains a number of options and functions not present in
-iperf2.  In addition, some flags are changed from their iperf2
-counterparts:
-
-    -C, --linux-congestion    set congestion control algorithm (Linux only)
-                              (-Z in iperf2)
-    --bidir                   bidirectional testing mode
-                              (-d in iperf2)
-
-Some iperf2 options are not available in iperf3:
-
-    -r, --tradeoff           Do a bidirectional test individually
-    -T, --ttl                time-to-live, for multicast (default 1)
-    -x, --reportexclude [CDMSV]   exclude C(connection) D(data) M(multicast)
-                                  S(settings) V(server) reports
-    -y, --reportstyle C      report as a Comma-Separated Values
-
-Also removed is the ability to set the options via environment
-variables.
 
 Known Issues
 ------------
@@ -150,7 +145,7 @@ responsibility for the content of these pages.
 Copyright
 ---------
 
-iperf, Copyright (c) 2014-2023, The Regents of the University of
+iperf, Copyright (c) 2014-2026, The Regents of the University of
 California, through Lawrence Berkeley National Laboratory (subject
 to receipt of any required approvals from the U.S. Dept. of
 Energy).  All rights reserved.

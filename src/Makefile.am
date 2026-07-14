@@ -33,6 +33,8 @@ libiperf_la_SOURCES     = \
                         iperf_util.h \
                         iperf_time.c \
                         iperf_time.h \
+                        iperf_pthread.c \
+                        iperf_pthread.h \
 			dscp.c \
                         net.c \
                         net.h \
@@ -100,3 +102,6 @@ TESTS                   = \
 			t_auth
 
 dist_man_MANS          = iperf3.1 libiperf.3
+
+install-exec-hook:
+	if test -n "$(LDCONFIG)"; then $(LDCONFIG) || true; fi
